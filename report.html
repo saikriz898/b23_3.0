@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlurSpot - Report an Issue</title>
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="report.html">Home</a></li>
+            <li><a href="#" onclick="logout()">Logout</a></li>
+            <li><a href="help.html">Help</a></li>
+            <li><a href="#" onclick="showContactPopup()">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Contact Popup -->
+    <div id="contactPopup" class="popup hidden">
+        <div class="popup-content">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <h2>Contact Information</h2>
+            <p>Email: <strong>mistermanuniq@gmail.com</strong></p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Report Form -->
+        <div class="report-form animate-fade-in">
+            <h1>Report an Issue</h1>
+
+            <div class="form-group">
+                <label for="description">Describe the Issue:</label>
+                <textarea id="description" rows="5" placeholder="Explain the problem clearly..." required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="images">Upload Images (Max 3):</label>
+                <input type="file" id="images" multiple accept="image/*">
+            </div>
+
+            <div class="form-group">
+                <label>Or Capture Photo:</label>
+                <button onclick="openCamera()">📸 Open Camera</button>
+                <video id="video" autoplay class="hidden"></video>
+                <button id="captureButton" class="hidden" onclick="capturePhoto()">Capture</button>
+                <div id="imagePreview"></div>
+            </div>
+
+            <div class="form-group">
+                <label>Your Location:</label>
+                <p id="address" class="address-display">Location not selected.</p>
+                <button id="selectLocationButton" onclick="getLocation()">📍 Select My Location</button>
+            </div>
+
+            <button onclick="submitReport()">🚀 Submit Report</button>
+        </div>
+
+        <!-- Map -->
+        <div class="map-container animate-slide-up">
+            <div id="map"></div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        const webhookUrl = "https://discord.com/api/webhooks/1348288332609749176/9EgC4kxY__6tu2Rop2Oax1Gc8zFyenfnZwcBQtjTbr345yshm9j9gMbYeVjuU7H6zqRV";
+        let map, marker;
+
+        window.addEventListener("load", () => {
+            map = L.map('map').setView([20.5937, 78.9629], 5);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        });
+
+        // Fetch user's location when "Select My Location" is clicked
+        function getLocation() {
+            const addressDisplay = document.getElementById('address');
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    async (pos) => {
+                        const lat = pos.coords.latitude;
+                        const lon = pos.coords.longitude;
+
+                        map.setView([lat, lon], 18);
+                        if (marker) map.removeLayer(marker);
+                        marker = L.marker([lat, lon]).addTo(map).bindPopup("Your Location").openPopup();
+
+                        try {
+                            const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`);
+                            const data = await res.json();
+                            addressDisplay.textContent = `📍 Address: ${data.display_name || "Location selected"}`;
+                        } catch (err) {
+                            addressDisplay.textContent = "Failed to fetch address.";
+                        }
+                    },
+                    (err) => {
+                        addressDisplay.textContent = "Failed to get location.";
+                    },
+                    { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
+                );
+            } else {
+                addressDisplay.textContent = "Geolocation not supported.";
+            }
+        }
+
+        // Camera Functions
+        async function openCamera() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                const video = document.getElementById('video');
+                video.srcObject = stream;
+                video.classList.remove('hidden');
+                document.getElementById('captureButton').classList.remove('hidden');
+            } catch (err) {
+                alert("Failed to access camera.");
+            }
+        }
+
+        function capturePhoto() {
+            const video = document.getElementById('video');
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            document.getElementById('imagePreview').innerHTML = `<img src="${canvas.toDataURL('image/png')}" alt="Captured Image" class="preview-image">`;
+
+            video.srcObject.getTracks().forEach(track => track.stop());
+            video.classList.add('hidden');
+            document.getElementById('captureButton').classList.add('hidden');
+        }
+
+        // Submit report
+        async function submitReport() {
+            const description = document.getElementById('description').value;
+            const images = document.getElementById('images').files;
+            const address = document.getElementById('address').textContent;
+
+            if (!description || address.includes("Location not selected")) {
+                alert("Please fill in all details and select your location.");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append("content", `🚨 **New Issue Reported**\n- **Description:** ${description}\n- **Address:** ${address}\n- **Timestamp:** ${new Date().toLocaleString()}`);
+
+            for (let i = 0; i < Math.min(images.length, 3); i++) {
+                formData.append(`file${i}`, images[i]);
+            }
+
+            try {
+                const response = await fetch(webhookUrl, {
+                    method: "POST",
+                    body: formData,
+                });
+
+                if (!response.ok) {
+                    throw new Error("Failed to send report to Discord.");
+                }
+
+                alert("Issue reported successfully!");
+                window.location.href = "confirmation.html";
+            } catch (err) {
+                console.error("Error submitting report:", err);
+                alert("Failed to submit the report. Please try again.");
+            }
+        }
+
+        function logout() {
+            alert("Logout successful!");
+            window.location.href = "index.html";
+        }
+
+        function showContactPopup() {
+            document.getElementById('contactPopup').classList.remove('hidden');
+        }
+
+        function closePopup() {
+            document.getElementById('contactPopup').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>

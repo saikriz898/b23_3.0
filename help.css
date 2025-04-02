@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: #121212;
+}
+.help-container{
+    background: #624646;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 800px;
+    margin: 50px auto;
+    box-shadow: 0 4px 20px rgb(230, 235, 227);
+}
+.help-container h1{
+    font-size: 40px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: rgb(221, 140, 48);
+    background: transparent;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+.help-container h2{
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color:  #b5e328;
+    background: transparent;
+}
+
+.help-container p{
+    font-size: 18px;
+    background: transparent;
+    font-weight: 300;
+    text-align: center;
+    color:white;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.help-container ul{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 0;
+}
+.help-container li{
+    background: rgba(11, 11, 11, 0.74);
+    width: 100%;
+    color:white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 2px solid rgba(34, 33, 33, 0.008);
+    border-color: #121212;
+    border-radius: 10px;
+    list-style: none;
+    padding: 10px;
+    font-size: 15px;
+    font-weight: 300;
+}
+
+.help-container strong{
+    width: 100%;
+    font-size: 16px;
+    color:#09f1bb;
+    font-weight: 700;
+}
+.help-container a{
+    color: rgb(0, 255, 255);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 18px;
+    transition: color 0.3s ease;
+    margin-right: 100px;
+}
+.help-container a:hover{
+    color: rgb(193, 183, 53);
+    text-decoration: underline;
+}
+
+button{
+    background: rgba(28, 160, 208, 0.689);
+    margin: 10px;
+    padding: 15px 45px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    color: white; 
+    border-radius: 8px 16px;
+    display: block;
+    box-shadow: 0 4px 20px rgba(13, 172, 230, 0.689);
+}
+button:hover{
+    background: rgba(31, 209, 7, 0.689);
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(31, 209, 7, 0.689);
+    transform: translate3d(0, -2px, 0);
+    transition: transform 0.5 s ease;
+    cursor: pointer;
+}

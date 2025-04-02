@@ -1,0 +1,110 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background:url(https://cdn.create.vista.com/api/media/small/489272424/stock-video-trend-colors-gradient-abstract-loop-motion-background-gradient-wave-animation?videoStaticPreview=true&token=);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+.login-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+}
+.login-container{
+    background:linear-gradient(to right, #6a11cb, #5c5d5f);
+    width: 100%;
+    border-radius: 10px;
+    padding: 40px 20px;
+    width: 100%;
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2), /* Subtle black shadow */
+    0px 6px 20px 0px rgba(255, 105, 180, 0.4);
+    text-align: center;
+}
+.login-container h1{
+    margin-top: 20px;
+    margin-bottom: 50px;
+    color: #ffe69a; /* Gold for a warm accent */
+    text-shadow: 2px 2px 6px rgba(255, 105, 180, 0.4);
+    font-size: 30px;
+}
+.form-group {
+    margin-bottom: 30px;
+    position: relative;
+}
+
+input[type="email"],input[type="email"]{
+    width: 100%;
+    padding: 8px 4px;
+    border: none;
+    border-bottom: 2px solid #ffe69a;
+    background: transparent;
+    color: #fff;
+    font-size: 16px;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+}
+input[type="email"],input[type="text"]{
+    gap: 10px;
+    margin-top: 10px;
+    width: 100%;
+    padding: 8px 4px;
+    border: none;
+    border-bottom: 2px solid #ffe69a;
+    background: transparent;
+    color: #fff;
+    font-size: 16px;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-bottom: 2px solid #ff69b4;
+    transform: translateY(-2px);
+}
+
+input:hover {
+    border-bottom: 2px solid #ff69b4;
+}
+
+ input::placeholder {
+    color: #d3d3d3;
+    font-style: italic;
+}
+.hidden {
+    display: none;
+}
+.btn{
+    margin-top: 10px;
+}
+button{
+    padding: 15px 30px;
+    border: none;
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 16px;
+    border-radius: 12px;
+    transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: #4CAF50;
+    box-shadow: 0 10px #2e7d32;
+}
+
+button:active {
+    box-shadow: 0 4px #1b5e20;
+    transform: translateY(6px);
+}
+.resendbtn{
+    margin-bottom: 10px;
+}

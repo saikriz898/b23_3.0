@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlurSpot - Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="login-wrapper">
+        <div class="login-container">
+            <h1>Login to BlurSpot</h1>
+
+            <form id="login-form">
+                <div class="form-group">
+                    <input type="email" id="email" placeholder="Email" required autocomplete="off">
+                </div>
+
+                <button type="button" id="sendOtpButton" onclick="sendOTP()">Send OTP</button>
+                <button type="button" id="resendotpButton" onclick="condition()" class="resendbtn">Resend OTP</button>
+
+                <div id="otp-section" class="hidden">
+                    <input type="text" id="otp" placeholder="OTP">
+                    <button type="submit" class="btn">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('resendotpButton').style.display = 'none';
+        function sendOTP() {
+            const email = document.getElementById('email').value;
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (emailPattern.test(email)) {
+                generatedOtp = generateOTP(6);
+                alert("Your OTP is: " + generatedOtp);
+                document.getElementById('otp-section').classList.remove('hidden');
+                document.getElementById('sendOtpButton').style.display = 'none';
+                document.getElementById('resendotpButton').style.display = 'block';
+            } else {
+                alert("Please enter a valid email.");
+            }
+        }
+        //Resend Otp
+        let resendCount = 0;
+
+        function condition() {
+            if (resendCount < 3) {
+            generatedOtp = generateOTP(6);
+            alert("Your OTP is: " + generatedOtp);
+            resendCount++;
+            } else {
+            alert("You have exceeded the maximum number of OTP requests.");
+            }
+        }
+        //geting OTP
+        function generateOTP(limit) {
+          var digits = '0123456789';
+          let OTP = '';
+          for (let i = 0; i < limit; i++ ) {
+              OTP += digits[Math.floor(Math.random() * 10)];
+          }
+          return OTP;
+      }
+        // Simulate sending OTP
+        let generatedOtp = '';
+        document.getElementById('sendOtpButton').addEventListener('click', function () {
+            if (emailPattern.test(email)) {
+                generatedOtp = generateOTP(6);
+                alert("Your OTP is: " + generatedOtp);
+            } else {
+                alert("Please enter a valid email.");
+            }
+        });
+        //submitting OTP
+        document.getElementById('login-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const otp = document.getElementById('otp').value;
+            if (otp === generatedOtp) {
+            window.location.href = "report.html";
+            } else {
+            alert("Invalid OTP. Try again!");
+            }
+        });
+    </script>
+</body>
+</html>
