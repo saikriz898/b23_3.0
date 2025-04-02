@@ -1,110 +1,729 @@
-*{
+/* General Styles */
+body {
+    background: #121212;
+    color: white;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-body{
-    background:url(https://cdn.create.vista.com/api/media/small/489272424/stock-video-trend-colors-gradient-abstract-loop-motion-background-gradient-wave-animation?videoStaticPreview=true&token=);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90vh;
+    padding-top: 70px; /* Adjust for navbar */
 }
-.login-wrapper{
+
+/* Main container */
+.container {
+    display: flex;
+    gap: 20px;
+    width: 90%;
+    max-width: 1200px;
+}
+
+/* Navigation Bar */
+.navbar {
+    background: #1e1e1e;
+    padding: 15px 0;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 5px 10px rgba(255, 76, 76, 0.5);
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar li {
+    display: inline;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+.navbar a:hover {
+    background-color: #ff4c4c;
+}
+
+/* Report Form */
+.report-form {
+    background: #1e1e1e;
+    padding: 40px;
+    border-radius: 12px;
+    width: 45%;
+    box-shadow: 0 10px 30px rgba(255, 76, 76, 0.5);
+}
+
+h1 {
+    color: #ff4c4c;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Form fields */
+input, textarea, button {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 15px;
+}
+
+textarea {
+    resize: none;
+}
+
+button {
+    background-color: #ff4c4c;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+button:hover {
+    background-color: #e63939;
+}
+
+/* Address display */
+.address-display {
+    background: #2c2c2c;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #ff4c4c;
+}
+
+/* Map container */
+.map-container {
+    background: #2c2c2c;
+    border-radius: 12px;
+    flex-grow: 1;
+    min-height: 500px;
+    width: 55%;
+    margin-top: 20px;
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+    border-radius: 12px;
+}
+
+/* Camera */
+video {
+    width: 100%;
+    max-height: 300px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+#imagePreview img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+/* Popup */
+.popup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 999;
+}
+
+.popup-content {
+    background: #1e1e1e;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(255, 76, 76, 0.5);
+    color: white;
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+}
+
+.close-btn {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Help Page */
+.help-container {
+    background: #1e1e1e;
+    color: white;
+    padding: 50px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 800px;
+    margin: 50px auto;
+    box-shadow: 0 10px 30px rgba(255, 76, 76, 0.5);
+}
+
+.help-container h1 {
+    color: #ff4c4c;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.help-container h2 {
+    color: #ff4c4c;
+    margin-top: 25px;
+    font-size: 1.5rem;
+}
+
+.help-container p {
+    text-align: center;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+
+.help-container ul {
+    list-style: none;
+    padding: 0;
+    font-size: 1.1rem;
+    line-height: 2;
+}
+
+.help-container li {
+    background: #2c2c2c;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.back-btn {
+    display: inline-block;
+    background-color: #ff4c4c;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-top: 30px;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+.back-btn:hover {
+    background-color: #e63939;
+}
+
+/* ✅ Mobile Responsiveness */
+@media (max-width: 768px) {
+    body {
+        align-items: flex-start;
+        height: auto;
+        padding: 20px;
+    }
+
+    .container {
+        flex-direction: column;
+        width: 100%;
+        gap: 20px;
+    }
+
+    .report-form {
+        width: 100%;
+        padding: 30px;
+        border-radius: 8px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    input, textarea, button {
+        padding: 15px;
+        font-size: 1rem;
+    }
+
+    .address-display {
+        font-size: 1rem;
+    }
+
+    .map-container {
+        width: 100%;
+        height: 350px;
+        border-radius: 8px;
+    }
+
+    #map {
+        height: 100%;
+        border-radius: 8px;
+    }
+
+    video {
+        max-height: 250px;
+    }
+
+    #imagePreview img {
+        margin-top: 15px;
+    }
+
+    .navbar ul {
+        flex-direction: row;
+        justify-content: space-around;
+        gap: 15px;
+    }
+
+    .help-container {
+        padding: 30px;
+        border-radius: 8px;
+    }
+
+    .popup-content {
+        padding: 20px;
+    }
+}
+/* Login Page */
+body {
+    background: #121212;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.login-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     max-width: 400px;
 }
-.login-container{
-    background:linear-gradient(to right, #6a11cb, #5c5d5f);
+
+.login-container {
+    background: #1e1e1e;
+    padding: 40px;
+    border-radius: 12px;
     width: 100%;
-    border-radius: 10px;
-    padding: 40px 20px;
-    width: 100%;
-    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2), /* Subtle black shadow */
-    0px 6px 20px 0px rgba(255, 105, 180, 0.4);
+    box-shadow: 0 10px 30px rgba(255, 76, 76, 0.5);
     text-align: center;
 }
-.login-container h1{
-    margin-top: 20px;
-    margin-bottom: 50px;
-    color: #ffe69a; /* Gold for a warm accent */
-    text-shadow: 2px 2px 6px rgba(255, 105, 180, 0.4);
-    font-size: 30px;
+
+h1 {
+    color: #ff4c4c;
+    font-size: 2rem;
+    margin-bottom: 20px;
 }
+
+/* Form fields */
 .form-group {
-    margin-bottom: 30px;
-    position: relative;
+    margin-bottom: 20px;
+    text-align: left;
 }
 
-input[type="email"],input[type="email"]{
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+input {
     width: 100%;
-    padding: 8px 4px;
+    padding: 12px;
+    border-radius: 8px;
     border: none;
-    border-bottom: 2px solid #ffe69a;
-    background: transparent;
-    color: #fff;
-    font-size: 16px;
-    transition: border-color 0.3s ease, transform 0.3s ease;
+    font-size: 1rem;
+    background: #2c2c2c;
+    color: white;
 }
-input[type="email"],input[type="text"]{
-    gap: 10px;
-    margin-top: 10px;
+
+button {
     width: 100%;
-    padding: 8px 4px;
+    padding: 12px;
+    border-radius: 8px;
     border: none;
-    border-bottom: 2px solid #ffe69a;
-    background: transparent;
-    color: #fff;
-    font-size: 16px;
-    transition: border-color 0.3s ease, transform 0.3s ease;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #ff4c4c;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
 }
 
-input:focus {
-    outline: none;
-    border-bottom: 2px solid #ff69b4;
-    transform: translateY(-2px);
+button:hover {
+    background-color: #e63939;
 }
 
-input:hover {
-    border-bottom: 2px solid #ff69b4;
+/* OTP Section */
+#otp-section {
+    margin-top: 20px;
 }
 
- input::placeholder {
-    color: #d3d3d3;
-    font-style: italic;
-}
 .hidden {
     display: none;
 }
-.btn{
-    margin-top: 10px;
-}
-button{
-    padding: 15px 30px;
-    border: none;
-    cursor: pointer;
-    color: #ffffff;
-    font-size: 16px;
-    border-radius: 12px;
-    transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
-    position: relative;
-    overflow: hidden;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    background: #4CAF50;
-    box-shadow: 0 10px #2e7d32;
+/* Ensure navbar stays fixed without overlap */
+.navbar {
+    background: #1e1e1e;
+    padding: 15px 0;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Ensures navbar stays above everything */
+    box-shadow: 0 5px 10px rgba(255, 76, 76, 0.5);
 }
 
-button:active {
-    box-shadow: 0 4px #1b5e20;
-    transform: translateY(6px);
+.navbar ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
 }
-.resendbtn{
-    margin-bottom: 10px;
+
+.navbar li {
+    display: inline;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+.navbar a:hover {
+    background-color: #ff4c4c;
+}
+
+/* Adjust body padding to prevent map from going under navbar */
+body {
+    padding-top: 70px; /* Ensures content starts below the fixed navbar */
+    background: #121212;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding-bottom: 50px;
+}
+
+/* Map container */
+.map-container {
+    background: #2c2c2c;
+    border-radius: 12px;
+    min-height: 500px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+#map {
+    height: 500px; /* Ensure map has a proper height */
+    width: 100%;
+    border-radius: 12px;
+    z-index: 1; /* Keeps map below the navbar */
+}
+/* Navigation Bar */
+.navbar {
+    background: #1e1e1e;
+    padding: 15px 0;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 5px 10px rgba(255, 76, 76, 0.5);
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar li {
+    display: inline;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+.navbar a:hover {
+    background-color: #ff4c4c;
+}
+
+/* Body to prevent overlap and remove extra space */
+body {
+    background: #121212;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding-top: 80px; /* Ensure space for navbar */
+}
+
+/* Main container for map and form */
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 90%;
+    max-width: 1200px;
+}
+
+/* Report form */
+.report-form {
+    background: #1e1e1e;
+    padding: 40px;
+    border-radius: 12px;
+    width: 45%;
+    box-shadow: 0 10px 30px rgba(255, 76, 76, 0.5);
+}
+
+/* Map container */
+.map-container {
+    background: #2c2c2c;
+    border-radius: 12px;
+    width: 55%;
+    min-height: 500px;
+    box-shadow: 0 10px 30px rgba(255, 76, 76, 0.5);
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+    border-radius: 12px;
+}
+
+/* Form elements */
+h1 {
+    color: #ff4c4c;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+input, textarea, button {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 15px;
+}
+
+textarea {
+    resize: none;
+}
+
+button {
+    background-color: #ff4c4c;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #e63939;
+}
+
+/* Address display */
+.address-display {
+    background: #2c2c2c;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #ff4c4c;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+        align-items: center;
+        padding-top: 100px;
+    }
+
+    .container {
+        flex-direction: column;
+        width: 100%;
+        gap: 20px;
+    }
+
+    .report-form {
+        width: 100%;
+        padding: 30px;
+    }
+
+    .map-container {
+        width: 100%;
+        height: 400px;
+    }
+
+    #map {
+        height: 100%;
+    }
+}
+/* PC and Laptop Layout (Unchanged) */
+body {
+    background: #121212;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding-top: 80px;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 90%;
+    max-width: 1200px;
+}
+
+.report-form {
+    background: #1e1e1e;
+    padding: 40px;
+    border-radius: 12px;
+    width: 45%;
+    box-shadow: 0 10px 30px rgba(255, 76, 76, 0.5);
+}
+
+.map-container {
+    background: #2c2c2c;
+    border-radius: 12px;
+    width: 55%;
+    min-height: 500px;
+    box-shadow: 0 10px 30px rgba(255, 76, 76, 0.5);
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+    border-radius: 12px;
+}
+
+/* ✅ Mobile Layout */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+        align-items: center;
+        padding-top: 100px;
+        padding-bottom: 20px;
+    }
+
+    .container {
+        flex-direction: column;
+        width: 95%;
+        gap: 25px;
+    }
+
+    /* Report form */
+    .report-form {
+        width: 100%;
+        padding: 30px;
+        border-radius: 10px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+
+    input, textarea, button {
+        padding: 15px;
+        font-size: 1.1rem;
+    }
+
+    /* Camera */
+    video {
+        width: 100%;
+        max-height: 300px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        display: block;
+    }
+
+    #captureButton {
+        display: block;
+        margin: 10px auto;
+    }
+
+    #imagePreview img {
+        max-width: 100%;
+        border-radius: 10px;
+        margin-top: 15px;
+        display: block;
+    }
+
+    /* Map */
+    .map-container {
+        width: 100%;
+        height: 400px;
+        border-radius: 10px;
+    }
+
+    #map {
+        height: 100%;
+        border-radius: 10px;
+    }
+
+    /* Navbar adjustments */
+    .navbar ul {
+        flex-direction: row;
+        justify-content: space-around;
+        gap: 15px;
+    }
+
+    .navbar a {
+        font-size: 1rem;
+        padding: 8px 15px;
+    }
 }
